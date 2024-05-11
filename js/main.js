@@ -21,7 +21,9 @@ var slotEasing = ['easeOutQuart'];
 // 回転秒数
 var slotDuration = 5;
 // 当たり目確率（1=100%、0.5=50%）
-var kakuritu = 0.3;
+var kakuritu = 1.0;
+// 点数
+let tensuu = 0;
 
 /*---------------------
  Definitions
@@ -47,6 +49,9 @@ $(document).ready(function() {
   slotCreate( $("#slots_b .wrapper"), 2 );
   // C枠にスロット画像を生成
   slotCreate( $("#slots_c .wrapper"), 3 );
+
+
+  slotPoints()
 });
 
 /* 当たり判定 */
@@ -150,7 +155,10 @@ function slotCreate(obj, slotno){
     "margin-top" : startPos + "px"
   });
   console.log(slot_random[middleNum-1,middleNum,middleNum+1])
-  console.log("1列目"+result2[1],"2列目"+result2[2],"3列目"+result2[3])
+
+  console.log("Top 1列目"+result1[1],"2列目"+result1[2],"3列目"+result1[3])
+  console.log("Middle 1列目"+result2[1],"2列目"+result2[2],"3列目"+result2[3])
+  console.log("Bottom 1列目"+result3[1],"2列目"+result3[2],"3列目"+result3[3])
 //   return [slot_random[middleNum-1,middleNum,middleNum+1]]
 //   console.log(result2)
 //   console.log(result3)
@@ -188,15 +196,61 @@ function slotStart(){
   
   // スロット停止後の処理（jQueryキューで回転秒数後に実行）
   $(this).delay(time+500).queue(function() {
-    // 結果判定
-    if (result2[1] == result2[2] && result2[1] == result2[3]) {
-        // あたりメッセージ表示
-        $("#slotMsg").html("BINGO !!!");
-    } else {
-        // はずれメッセージ表示
-        $("#slotMsg").html("TRY AGAIN");
+    
+// 結果判定: 上　横
+if (result1[1] == result1[2] && result1[1] == result1[3]) {
+    // あたりメッセージ表示
+    $("#slotMsg").html("BINGO !!!");
+    tensuu += 1;
+    $("#tensuu").html(tensuu);
+} else {
+    // はずれメッセージ表示
+    $("#slotMsg").html("TRY AGAIN");
+}
+
+// 結果判定: 中央　横
+if (result2[1] == result2[2] && result2[1] == result2[3]) {
+    // あたりメッセージ表示
+    $("#slotMsg").html("BINGO !!!");
+    tensuu += 1;
+    $("#tensuu").html(tensuu);
+} else {
+    // はずれメッセージ表示
+    $("#slotMsg").html("TRY AGAIN");
     }
     
+// 結果判定: 下　横
+if (result3[1] == result3[2] && result3[1] == result3[3]) {
+    // あたりメッセージ表示
+    $("#slotMsg").html("BINGO !!!");
+    tensuu += 1;
+    $("#tensuu").html(tensuu);
+} else {
+    // はずれメッセージ表示
+    $("#slotMsg").html("TRY AGAIN");
+}
+    
+// 結果判定: 斜め下
+if (result1[1] == result2[2] && result1[1] == result3[3]) {
+    // あたりメッセージ表示
+    $("#slotMsg").html("BINGO !!!");
+    tensuu += 1;
+    $("#tensuu").html(tensuu);
+} else {
+    // はずれメッセージ表示
+    $("#slotMsg").html("TRY AGAIN");
+}
+    
+// 結果判定: 斜め上
+if (result3[1] == result2[2] && result3[1] == result1[3]) {
+    // あたりメッセージ表示
+    $("#slotMsg").html("BINGO !!!");
+    tensuu += 1;
+    $("#tensuu").html(tensuu);
+} else {
+    // はずれメッセージ表示
+    $("#slotMsg").html("TRY AGAIN");
+}
     // スタートボタンの有効化
     $("#startBtn").prop('disabled', false);
     
