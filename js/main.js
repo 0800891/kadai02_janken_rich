@@ -138,7 +138,7 @@ function slotCreate(obj, slotno){
     
     obj.append("<div class='slot'>"
     + "<img border='0' class='ml-4'"
-    + " src='img_02/" + slotImg[idx] + "'"
+    + " src='img/" + slotImg[idx] + "'"
     + " width='45' height='20'/>"
     + "</div>");
     slot_random[i] = idx;
