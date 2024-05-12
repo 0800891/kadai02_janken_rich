@@ -97,6 +97,14 @@ function changeHeightClass(className, Height,Top){
     elems[2].style.top =  Top;
 }
 
+//Idの場合
+function changeHeightId(IdName, Height,Top){
+    var elem = document.getElementById(IdName);
+    //高さを変える
+    elem.style.height =  Height;
+    //位置を変える
+    elem.style.top =  Top;
+}
 
 //スロットの特点
 function slotPoints(a,b,c){
@@ -153,6 +161,13 @@ function slotCreate(obj, slotno){
 　changeHeightClass('slotline-top','2px','30px');
   changeHeightClass('slotline-middle','2px','85px');
   changeHeightClass('slotline-bottom','2px','140px');
+  //斜め線の高さを戻す
+  changeHeightId('a_naname-shita-slotline','2px','30px');
+  changeHeightId('b_naname-shita-slotline','2px','85px');
+  changeHeightId('c_naname-shita-slotline','2px','140px');
+  changeHeightId('a_naname-ue-slotline','2px','140px');
+  changeHeightId('b_naname-ue-slotline','2px','85px');
+  changeHeightId('c_naname-ue-slotline','2px','30px');
 
   var slot_random = []
   // スロット画像のタグ生成
@@ -320,6 +335,10 @@ if (result1[1] == result2[2] && result1[1] == result3[3]) {
     changeColorId('a_naname-shita-slotline', 'blue');
     changeColorId('b_naname-shita-slotline', 'blue');
     changeColorId('c_naname-shita-slotline', 'blue');
+    //斜め線の高さの変更
+    changeHeightId('a_naname-shita-slotline','4px','29px');
+    changeHeightId('b_naname-shita-slotline','4px','84px');
+    changeHeightId('c_naname-shita-slotline','4px','139px');
 } else {
     // そのままの点数表示
     $("#tensuu").html(tensuu);
@@ -336,14 +355,21 @@ if (result3[1] == result2[2] && result3[1] == result1[3]) {
     changeColorId('a_naname-ue-slotline', 'blue');
     changeColorId('b_naname-ue-slotline', 'blue');
     changeColorId('c_naname-ue-slotline', 'blue');
+    //斜め線の高さの変更
+    changeHeightId('a_naname-ue-slotline','4px','139px');
+    changeHeightId('b_naname-ue-slotline','4px','84px');
+    changeHeightId('c_naname-ue-slotline','4px','29px');
 } else {
     // そのままの点数表示
     $("#tensuu").html(tensuu);
 }
 
-if (tensuu > previous_tensuu){
+if (tensuu > previous_tensuu+1){
+// 特大あたりメッセージ表示
+$("#slotMsg").html("EXCELENT !!!");
+}else if(tensuu > previous_tensuu){
 // あたりメッセージ表示
-$("#slotMsg").html("BINGO !!!");
+$("#slotMsg").html("BINGO !");
 }else{
 // はずれメッセージ表示
 $("#slotMsg").html("TRY AGAIN");
