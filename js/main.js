@@ -23,10 +23,13 @@ var slotDuration = 5;
 // 当たり目確率（1=100%、0.5=50%）
 var kakuritu = 1.0;
 // 点数
-let tensuu = 0;
+let tensuu_1 = 0;
+let tensuu_2 = 0;
 // 前回の点数
-let previous_tensuu = 0;
-
+let previous_tensuu_1 = 0;
+let previous_tensuu_2 = 0;
+//Offence or Deffence
+let num_offense = 0;
 /*---------------------
  Definitions
 -----------------------*/
@@ -52,7 +55,6 @@ $(document).ready(function() {
   // C枠にスロット画像を生成
   slotCreate( $("#slots_c .wrapper"), 3 );
 
-
   slotPoints()
 });
 
@@ -61,6 +63,21 @@ $(document).ready(function() {
 //   atariIdx = Math.floor(Math.random() * slotImg.length);
 //   hantei = Math.random() < kakuritu;
 // };
+
+// オフェンスかディフェンスか
+function offense_defense(){
+    var num_off_def = Math.floor(Math.random() * 2);
+    if (num_off_def === 0){
+        $("#shouhoku_off").html("オフェンス");
+        $("#sannou_off").html("ディフェンス");
+
+    }else{
+        $("#shouhoku_off").html("ディフェンス");
+        $("#sannou_off").html("オフェンス");
+
+    }
+    return num_off_def
+}
 
 /*当たった場合の色の変更*/
 // classの場合
@@ -158,7 +175,7 @@ function slotCreate(obj, slotno){
   changeColorId('c_naname-ue-slotline', 'red');
 
   //横線の高さを戻す
-　changeHeightClass('slotline-top','2px','30px');
+  changeHeightClass('slotline-top','2px','30px');
   changeHeightClass('slotline-middle','2px','85px');
   changeHeightClass('slotline-bottom','2px','140px');
   //斜め線の高さを戻す
@@ -242,8 +259,14 @@ function slotStart(){
   // 開始メッセージ表示
   $("#slotMsg").html("GO !!");
   
+  // オフェンス
+  num_offense = offense_defense()
+
+
   //点数表示
-  $("#tensuu").html(tensuu);
+  $("#tensuu_1").html(tensuu_1);
+  $("#tensuu_2").html(tensuu_2);
+
 
   if ($("#slots_a .wrapper").css("margin-top") != startPos + "px"){
     // スロットが動いた後であれば、当たり判定を再度行なう
@@ -269,41 +292,57 @@ function slotStart(){
   // スロット停止後の処理（jQueryキューで回転秒数後に実行）
   $(this).delay(time+500).queue(function() {
     
-//結果判定に入る前に、前回の点数を保存
-previous_tensuu = tensuu;
-// 結果判定: 上　横
-if (result1[1] == result1[2] && result1[1] == result1[3]) {
-    // あたりメッセージ表示
-    $("#slotMsg").html("BINGO !!!");
+    //結果判定に入る前に、前回の点数を保存
+    previous_tensuu_1 = tensuu_1;
+    previous_tensuu_2 = tensuu_2;
+    // 結果判定: 上　横
+    if (result1[1] == result1[2] && result1[1] == result1[3]) {
+    
      // 点数１ポイントゲット
-    tensuu += 1;
+     if (num_offense == 0){
+        tensuu_1 += 1;
+        $("#character_image").attr('src','img/hukatsu.png');
+     }else{
+        tensuu_2 += 1;
+        $("#character_image").attr('src','img/hukatsu.png');
+
+     }
     //点数更新
-    $("#tensuu").html(tensuu);
+    $("#tensuu_1").html(tensuu_1);
+    $("#tensuu_2").html(tensuu_2);
     //横線の色を変更
     changeColorClass('slotline-top','blue');
     //横線の高さを変更
     changeHeightClass('slotline-top','4px','29px');
-} else {
+    } else {
    // そのままの点数表示
-    $("#tensuu").html(tensuu);
-}
+    $("#tensuu_1").html(tensuu_1);
+    $("#tensuu_2").html(tensuu_2);
+    }
 
 // 結果判定: 中央　横
-if (result2[1] == result2[2] && result2[1] == result2[3]) {
+    if (result2[1] == result2[2] && result2[1] == result2[3]) {
     // あたりメッセージ表示
     $("#slotMsg").html("BINGO !!!");
     // 点数１ポイントゲット
-    tensuu += 1;
+     if (num_offense == 0){
+        tensuu_1 += 1;
+        $("#character_image").attr('src','img/rukawa.jpeg');
+     }else{
+        tensuu_2 += 1;
+        $("#character_image").attr('src','img/sawakita.jpeg');
+     }
     // 点数更新
-    $("#tensuu").html(tensuu);
+    $("#tensuu_1").html(tensuu_1);
+    $("#tensuu_2").html(tensuu_2);
     //横線の色を変更
     changeColorClass('slotline-middle','blue');
     //横線の高さを変更
     changeHeightClass('slotline-middle','4px','84px');
-} else {
+    } else {
     // そのままの点数表示
-    $("#tensuu").html(tensuu);
-    
+    $("#tensuu_1").html(tensuu_1);
+    $("#tensuu_2").html(tensuu_2);
     }
     
 // 結果判定: 下　横
@@ -311,26 +350,41 @@ if (result3[1] == result3[2] && result3[1] == result3[3]) {
     // あたりメッセージ表示
     $("#slotMsg").html("BINGO !!!");
     // 点数１ポイントゲット
-    tensuu += 1;
-    $("#tensuu").html(tensuu);
+     if (num_offense == 0){
+        tensuu_1 += 1;
+        $("#character_image").attr('src','img/mitsui.jpeg');
+     }else{
+        tensuu_2 += 1;
+        $("#character_image").attr('src','img/matsumoto-minoru.jpeg');
+     }
+     $("#tensuu_1").html(tensuu_1);
+     $("#tensuu_2").html(tensuu_2);
     //横線の色を変更
     changeColorClass('slotline-bottom','blue');
     //横線の高さを変更
     changeHeightClass('slotline-bottom','4px','139px');
-} else {
+    } else {
     
     // そのままの点数表示
-    $("#tensuu").html(tensuu);
-}
+    $("#tensuu_1").html(tensuu_1);
+    $("#tensuu_2").html(tensuu_2);
+    }
     
 // 結果判定: 斜め下
 if (result1[1] == result2[2] && result1[1] == result3[3]) {
     // あたりメッセージ表示
     $("#slotMsg").html("BINGO !!!");
     // 点数１ポイントゲット
-    tensuu += 1;
+     if (num_offense == 0){
+        tensuu_1 += 1;
+        $("#character_image").attr('src','img/akagi.png');
+     }else{
+        tensuu_2 += 1;
+        $("#character_image").attr('src','img/kawata.jpeg');
+     }
     // 点数更新
-    $("#tensuu").html(tensuu);
+    $("#tensuu_1").html(tensuu_1);
+    $("#tensuu_2").html(tensuu_2);
     //斜め線の色の変更
     changeColorId('a_naname-shita-slotline', 'blue');
     changeColorId('b_naname-shita-slotline', 'blue');
@@ -339,18 +393,26 @@ if (result1[1] == result2[2] && result1[1] == result3[3]) {
     changeHeightId('a_naname-shita-slotline','4px','29px');
     changeHeightId('b_naname-shita-slotline','4px','84px');
     changeHeightId('c_naname-shita-slotline','4px','139px');
-} else {
+    } else {
     // そのままの点数表示
-    $("#tensuu").html(tensuu);
-}
+    $("#tensuu_1").html(tensuu_1);
+    $("#tensuu_2").html(tensuu_2);
+    }
     
-// 結果判定: 斜め上
-if (result3[1] == result2[2] && result3[1] == result1[3]) {
+    // 結果判定: 斜め上
+    if (result3[1] == result2[2] && result3[1] == result1[3]) {
     
     // 点数１ポイントゲット
-    tensuu += 1;
+     if (num_offense == 0){
+        tensuu_1 += 1;
+        $("#character_image").attr('src','img/hanamichi.jpeg');
+     }else{
+        tensuu_2 += 1;
+        $("#character_image").attr('src','img/kawata-mikio.jpeg');
+     }
     // 点数更新
-    $("#tensuu").html(tensuu);
+    $("#tensuu_1").html(tensuu_1);
+    $("#tensuu_2").html(tensuu_2);
     //斜め線の色の変更
     changeColorId('a_naname-ue-slotline', 'blue');
     changeColorId('b_naname-ue-slotline', 'blue');
@@ -359,15 +421,16 @@ if (result3[1] == result2[2] && result3[1] == result1[3]) {
     changeHeightId('a_naname-ue-slotline','4px','139px');
     changeHeightId('b_naname-ue-slotline','4px','84px');
     changeHeightId('c_naname-ue-slotline','4px','29px');
-} else {
+    } else {
     // そのままの点数表示
-    $("#tensuu").html(tensuu);
-}
+    $("#tensuu_1").html(tensuu_1);
+    $("#tensuu_2").html(tensuu_2);
+    }
 
-if (tensuu > previous_tensuu+1){
+if (tensuu_1 > previous_tensuu_1+1){
 // 特大あたりメッセージ表示
 $("#slotMsg").html("EXCELENT !!!");
-}else if(tensuu > previous_tensuu){
+}else if(tensuu_1 > previous_tensuu_1){
 // あたりメッセージ表示
 $("#slotMsg").html("BINGO !");
 }else{
