@@ -19,7 +19,7 @@ var middleNum = 3;
 // var slotEasing = ['swing','easeOutQuart','easeOutBack','easeOutBounce'];
 var slotEasing = ['easeOutQuart'];
 // 回転秒数
-var slotDuration = 5;
+var slotDuration = 1;
 // 当たり目確率（1=100%、0.5=50%）
 var kakuritu = 1.0;
 // 点数
@@ -69,14 +69,31 @@ function offense_defense(){
     var num_off_def = Math.floor(Math.random() * 2);
     if (num_off_def === 0){
         $("#shouhoku_off").html("オフェンス");
+        // $("#shouhoku_img").attr('src','img/kawata.jpeg');
+        // document.getElementById('shouhoku_img').src='img/shouhoku_def.jpeg';
+        changeImgId('shouhoku_img', 'img/shouhoku_off_01.jpeg');
+
         $("#sannou_off").html("ディフェンス");
+        // $("#sannou_img").attr('src','img/sannou_def.jpeg');
+        changeImgId('sannou_img', 'img/sannou_def_01.jpg');
 
     }else{
         $("#shouhoku_off").html("ディフェンス");
+        changeImgId('shouhoku_img', 'img/shouhoku_def_01.jpeg');
         $("#sannou_off").html("オフェンス");
+        changeImgId('sannou_img', 'img/sannou_def.jpeg');
+        // $("#character_image").attr('src','img/kawata.jpeg');
 
     }
     return num_off_def
+}
+
+// 画像の変更
+function changeImgId(IdName, img){
+    var elem = document.getElementById(IdName);
+
+    //文字色変える
+    elem.src =  img;
 }
 
 /*当たった場合の色の変更*/
@@ -186,6 +203,9 @@ function slotCreate(obj, slotno){
   changeHeightId('b_naname-ue-slotline','2px','85px');
   changeHeightId('c_naname-ue-slotline','2px','30px');
 
+  //画像を非表示
+  $("#character_image").attr('src','');
+
   var slot_random = []
   // スロット画像のタグ生成
   for (var i = 0; i <= slotNum; i++) {
@@ -257,7 +277,7 @@ function slotStart(){
   $("#startBtn").prop('disabled', true);
   
   // 開始メッセージ表示
-  $("#slotMsg").html("GO !!");
+  $("#slotMsg").html("速攻!!");
   
   // オフェンス
   num_offense = offense_defense()
@@ -301,7 +321,7 @@ function slotStart(){
      // 点数１ポイントゲット
      if (num_offense == 0){
         tensuu_1 += 1;
-        $("#character_image").attr('src','img/hukatsu.png');
+        $("#character_image").attr('src','img/miyagi.jpeg');
      }else{
         tensuu_2 += 1;
         $("#character_image").attr('src','img/hukatsu.png');
@@ -322,8 +342,7 @@ function slotStart(){
 
 // 結果判定: 中央　横
     if (result2[1] == result2[2] && result2[1] == result2[3]) {
-    // あたりメッセージ表示
-    $("#slotMsg").html("BINGO !!!");
+   
     // 点数１ポイントゲット
      if (num_offense == 0){
         tensuu_1 += 1;
@@ -429,13 +448,32 @@ if (result1[1] == result2[2] && result1[1] == result3[3]) {
 
 if (tensuu_1 > previous_tensuu_1+1){
 // 特大あたりメッセージ表示
-$("#slotMsg").html("EXCELENT !!!");
+$("#slotMsg").html("うおおおーーーっ !!!");
 }else if(tensuu_1 > previous_tensuu_1){
 // あたりメッセージ表示
-$("#slotMsg").html("BINGO !");
+$("#slotMsg").html("いい仕事したぜ 下手なりに");
 }else{
 // はずれメッセージ表示
-$("#slotMsg").html("TRY AGAIN");
+if (tensuu_2==previous_tensuu_2&&num_offense == 0){
+$("#slotMsg").html("どあほう");
+$("#character_image").attr('src','img/sannou_def_success.jpeg');
+}
+}
+
+
+if (tensuu_2 > previous_tensuu_2+1){
+    // 特大あたりメッセージ表示
+    $("#slotMsg").html("あきらめたらそこで試合終了ですよ");
+    }else if(tensuu_2 > previous_tensuu_2){
+    // あたりメッセージ表示
+    $("#slotMsg").html("華麗な技を持つ河田は鯛・・・");
+    }else{
+    // はずれメッセージ表示
+
+if (tensuu_1==previous_tensuu_1&&num_offense == 1){
+    $("#slotMsg").html("ヤマオーは俺が倒す");
+    $("#character_image").attr('src','img/shouhoku_def_success.jpeg');
+    }
 }
  
     // スタートボタンの有効化
