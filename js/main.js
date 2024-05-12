@@ -64,7 +64,7 @@ $(document).ready(function() {
 
 /*当たった場合の色の変更*/
 // classの場合
-function changeColor(className, color){
+function changeColorClass(className, color){
     var elems = document.getElementsByClassName(className);
 
     //文字色変える
@@ -123,9 +123,9 @@ function slotCreate(obj, slotno){
   var save_result3 = result3[slotno];
   
   //横線の色を戻す
-  changeColor('slotline-top','red');
-  changeColor('slotline-middle','red');
-  changeColor('slotline-bottom','red');
+  changeColorClass('slotline-top','red');
+  changeColorClass('slotline-middle','red');
+  changeColorClass('slotline-bottom','red');
   //斜め線の色を戻す
   changeColorId('a_naname-shita-slotline', 'red');
   changeColorId('b_naname-shita-slotline', 'red');
@@ -246,7 +246,7 @@ if (result1[1] == result1[2] && result1[1] == result1[3]) {
     $("#tensuu").html(tensuu);
     //横線の色を変更
     // console.log(document.getElementsByClassName('slotline-top'))
-    changeColor('slotline-top','blue');
+    changeColorClass('slotline-top','blue');
 } else {
    // そのままの点数表示
     $("#tensuu").html(tensuu);
@@ -263,7 +263,7 @@ if (result2[1] == result2[2] && result2[1] == result2[3]) {
     //横線の色を変更
 
     // console.log(document.getElementsByClassName('slotline-middle'))
-    changeColor('slotline-middle','blue');
+    changeColorClass('slotline-middle','blue');
 } else {
     // そのままの点数表示
     $("#tensuu").html(tensuu);
@@ -279,7 +279,7 @@ if (result3[1] == result3[2] && result3[1] == result3[3]) {
     $("#tensuu").html(tensuu);
     //横線の色を変更
     // console.log(document.getElementsByClassName('slotline-bottom'))
-    changeColor('slotline-bottom','blue');
+    changeColorClass('slotline-bottom','blue');
 } else {
     
     // そのままの点数表示
