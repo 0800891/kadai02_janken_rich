@@ -90,7 +90,7 @@
     top: 30px;
     opacity: 0.8;
     background-color: red;
-    transform:rotate(35deg);
+    transform:rotate(33deg);
   }
   
   #b_naname-shita-slotline{
@@ -101,7 +101,7 @@
     top: 85px;
     opacity: 0.8;
     background-color: red;
-    transform:rotate(35deg);
+    transform:rotate(33deg);
   }
 
   #c_naname-shita-slotline{
@@ -112,7 +112,7 @@
     top: 140px;
     opacity: 0.8;
     background-color: red;
-    transform:rotate(35deg);
+    transform:rotate(33deg);
   }
 
   #a_naname-ue-slotline{
@@ -123,7 +123,7 @@
     top: 140px;
     opacity: 0.8;
     background-color: red;
-    transform:rotate(-35deg);
+    transform:rotate(-33deg);
   }
 
   #b_naname-ue-slotline{
@@ -134,7 +134,7 @@
     top: 85px;
     opacity: 0.8;
     background-color: red;
-    transform:rotate(-35deg);
+    transform:rotate(-33deg);
   }
 
   #c_naname-ue-slotline{
@@ -145,7 +145,7 @@
     top: 30px;
     opacity: 0.8;
     background-color: red;
-    transform:rotate(-35deg);
+    transform:rotate(-33deg);
   }
 
 
