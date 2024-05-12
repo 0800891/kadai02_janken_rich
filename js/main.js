@@ -81,6 +81,21 @@ function changeColorId(IdName, color){
     elem.style.backgroundColor =  color;
 }
 
+/*当たった場合の高さの変更*/
+// classの場合
+function changeHeightClass(className, Height,Top){
+    var elems = document.getElementsByClassName(className);
+
+    //高さを変える
+    elems[0].style.height =  Height;
+    elems[1].style.height =  Height;
+    elems[2].style.height =  Height;
+
+    //位置を変える
+    elems[0].style.top =  Top;
+    elems[1].style.top =  Top;
+    elems[2].style.top =  Top;
+}
 
 
 //スロットの特点
@@ -133,6 +148,11 @@ function slotCreate(obj, slotno){
   changeColorId('a_naname-ue-slotline', 'red');
   changeColorId('b_naname-ue-slotline', 'red');
   changeColorId('c_naname-ue-slotline', 'red');
+
+  //横線の高さを戻す
+　changeHeightClass('slotline-top','2px','30px');
+  changeHeightClass('slotline-middle','2px','85px');
+  changeHeightClass('slotline-bottom','2px','140px');
 
   var slot_random = []
   // スロット画像のタグ生成
@@ -245,8 +265,9 @@ if (result1[1] == result1[2] && result1[1] == result1[3]) {
     //点数更新
     $("#tensuu").html(tensuu);
     //横線の色を変更
-    // console.log(document.getElementsByClassName('slotline-top'))
     changeColorClass('slotline-top','blue');
+    //横線の高さを変更
+    changeHeightClass('slotline-top','4px','29px');
 } else {
    // そのままの点数表示
     $("#tensuu").html(tensuu);
@@ -261,9 +282,9 @@ if (result2[1] == result2[2] && result2[1] == result2[3]) {
     // 点数更新
     $("#tensuu").html(tensuu);
     //横線の色を変更
-
-    // console.log(document.getElementsByClassName('slotline-middle'))
     changeColorClass('slotline-middle','blue');
+    //横線の高さを変更
+    changeHeightClass('slotline-middle','4px','84px');
 } else {
     // そのままの点数表示
     $("#tensuu").html(tensuu);
@@ -278,8 +299,9 @@ if (result3[1] == result3[2] && result3[1] == result3[3]) {
     tensuu += 1;
     $("#tensuu").html(tensuu);
     //横線の色を変更
-    // console.log(document.getElementsByClassName('slotline-bottom'))
     changeColorClass('slotline-bottom','blue');
+    //横線の高さを変更
+    changeHeightClass('slotline-bottom','4px','139px');
 } else {
     
     // そのままの点数表示
