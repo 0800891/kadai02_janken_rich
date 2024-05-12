@@ -30,7 +30,7 @@ let tensuu = 0;
 -----------------------*/
 var atariIdx;
 var easingIdx;
-var hantei;
+// var hantei;
 var time;
 var result1 = new Array();
 var result2 = new Array();
@@ -42,7 +42,7 @@ var result3 = new Array();
 /* 初期処理 */
 $(document).ready(function() {
   // 当たり判定
-  atariHantei();
+//   atariHantei();
   // A枠にスロット画像を生成
   slotCreate( $("#slots_a .wrapper"), 1 );
   // B枠にスロット画像を生成
@@ -55,10 +55,10 @@ $(document).ready(function() {
 });
 
 /* 当たり判定 */
-function atariHantei(){
-  atariIdx = Math.floor(Math.random() * slotImg.length);
-  hantei = Math.random() < kakuritu;
-};
+// function atariHantei(){
+//   atariIdx = Math.floor(Math.random() * slotImg.length);
+//   hantei = Math.random() < kakuritu;
+// };
 
 
 //スロットの特点
@@ -112,10 +112,10 @@ function slotCreate(obj, slotno){
       result1[slotno] = idx;
     } else if (i == middleNum) {
       // 最後に2行目にくる画像
-      if (hantei) {
-        // 当たり判定の場合は当たり目のINDEXを設定
-        idx = atariIdx;
-      }
+    //   if (hantei) {
+    //     // 当たり判定の場合は当たり目のINDEXを設定
+    //     idx = atariIdx;
+    //   }
       result2[slotno] = idx;
     } else if (i == middleNum+1) {
       // 最後に3行目にくる画像
@@ -175,7 +175,7 @@ function slotStart(){
   
   if ($("#slots_a .wrapper").css("margin-top") != startPos + "px"){
     // スロットが動いた後であれば、当たり判定を再度行なう
-    atariHantei();
+    // atariHantei();
   }
   
   // スロットの回転秒数の取得
@@ -239,6 +239,7 @@ if (result1[1] == result2[2] && result1[1] == result3[3]) {
 } else {
     // はずれメッセージ表示
     $("#slotMsg").html("TRY AGAIN");
+    $("#tensuu").html(tensuu);
 }
     
 // 結果判定: 斜め上
