@@ -6,7 +6,7 @@ Copyright 2016 Delta System Solutions Co.Ltd. All rights reserved.
 -----------------------*/
 // スロット画像配列
 // var slotImg = ['slot1.jpg','slot2.jpg','slot3.jpg','slot4.jpg','slot5.jpg'];
-var slotImg = ['slot1.jpg','slot2.jpg','slot3.jpg'];
+var slotImg = ['slot11.jpg','slot12.jpg','slot13.jpg'];
 // 縦に並べるスロット画像の数
 var slotNum = 50;
 // スロット画像のスタート位置
@@ -71,7 +71,7 @@ function offense_defense(){
         $("#shouhoku_off").html("オフェンス");
         // $("#shouhoku_img").attr('src','img/kawata.jpeg');
         // document.getElementById('shouhoku_img').src='img/shouhoku_def.jpeg';
-        changeImgId('shouhoku_img', 'img/shouhoku_off_01.jpeg');
+        changeImgId('shouhoku_img', 'img/shouhoku_off_02.jpeg');
 
         $("#sannou_off").html("ディフェンス");
         // $("#sannou_img").attr('src','img/sannou_def.jpeg');
@@ -81,7 +81,7 @@ function offense_defense(){
         $("#shouhoku_off").html("ディフェンス");
         changeImgId('shouhoku_img', 'img/shouhoku_def_01.jpeg');
         $("#sannou_off").html("オフェンス");
-        changeImgId('sannou_img', 'img/sannou_def.jpeg');
+        changeImgId('sannou_img', 'img/sannou_off.jpg');
         // $("#character_image").attr('src','img/kawata.jpeg');
 
     }
@@ -320,10 +320,10 @@ function slotStart(){
     
      // 点数１ポイントゲット
      if (num_offense == 0){
-        tensuu_1 += 1;
+        tensuu_1 += slotPoints(result1[1],result1[2],result1[3]);
         $("#character_image").attr('src','img/miyagi.jpeg');
      }else{
-        tensuu_2 += 1;
+        tensuu_2 += slotPoints(result1[1],result1[2],result1[3]);
         $("#character_image").attr('src','img/hukatsu.png');
 
      }
@@ -345,10 +345,10 @@ function slotStart(){
    
     // 点数１ポイントゲット
      if (num_offense == 0){
-        tensuu_1 += 1;
+        tensuu_1 += slotPoints(result2[1],result2[2],result2[3]);
         $("#character_image").attr('src','img/rukawa.jpeg');
      }else{
-        tensuu_2 += 1;
+        tensuu_2 += slotPoints(result2[1],result2[2],result2[3]);
         $("#character_image").attr('src','img/sawakita.jpeg');
      }
     // 点数更新
@@ -370,10 +370,10 @@ if (result3[1] == result3[2] && result3[1] == result3[3]) {
     $("#slotMsg").html("BINGO !!!");
     // 点数１ポイントゲット
      if (num_offense == 0){
-        tensuu_1 += 1;
+        tensuu_1 += slotPoints(result3[1],result3[2],result3[3]);
         $("#character_image").attr('src','img/mitsui.jpeg');
      }else{
-        tensuu_2 += 1;
+        tensuu_2 += slotPoints(result3[1],result3[2],result3[3]);
         $("#character_image").attr('src','img/matsumoto-minoru.jpeg');
      }
      $("#tensuu_1").html(tensuu_1);
@@ -395,10 +395,10 @@ if (result1[1] == result2[2] && result1[1] == result3[3]) {
     $("#slotMsg").html("BINGO !!!");
     // 点数１ポイントゲット
      if (num_offense == 0){
-        tensuu_1 += 1;
+        tensuu_1 += slotPoints(result1[1],result2[2],result3[3]);
         $("#character_image").attr('src','img/akagi.png');
      }else{
-        tensuu_2 += 1;
+        tensuu_2 += slotPoints(result1[1],result2[2],result3[3]);
         $("#character_image").attr('src','img/kawata.jpeg');
      }
     // 点数更新
@@ -423,10 +423,10 @@ if (result1[1] == result2[2] && result1[1] == result3[3]) {
     
     // 点数１ポイントゲット
      if (num_offense == 0){
-        tensuu_1 += 1;
+        tensuu_1 += slotPoints(result3[1],result2[2],result1[3]);
         $("#character_image").attr('src','img/hanamichi.jpeg');
      }else{
-        tensuu_2 += 1;
+        tensuu_2 += slotPoints(result3[1],result2[2],result1[3]);
         $("#character_image").attr('src','img/kawata-mikio.jpeg');
      }
     // 点数更新
@@ -446,7 +446,7 @@ if (result1[1] == result2[2] && result1[1] == result3[3]) {
     $("#tensuu_2").html(tensuu_2);
     }
 
-if (tensuu_1 > previous_tensuu_1+1){
+if (tensuu_1 > previous_tensuu_1+4){
 // 特大あたりメッセージ表示
 $("#slotMsg").html("うおおおーーーっ !!!");
 }else if(tensuu_1 > previous_tensuu_1){
@@ -461,7 +461,7 @@ $("#character_image").attr('src','img/sannou_def_success.jpeg');
 }
 
 
-if (tensuu_2 > previous_tensuu_2+1){
+if (tensuu_2 > previous_tensuu_2+4){
     // 特大あたりメッセージ表示
     $("#slotMsg").html("あきらめたらそこで試合終了ですよ");
     }else if(tensuu_2 > previous_tensuu_2){
