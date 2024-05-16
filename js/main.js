@@ -30,6 +30,8 @@ let previous_tensuu_1 = 0;
 let previous_tensuu_2 = 0;
 //Offence or Deffence
 let num_offense = 0;
+// スタートボタンの回数
+let num_start = 0;
 /*---------------------
  Definitions
 -----------------------*/
@@ -41,9 +43,32 @@ var result1 = new Array();
 var result2 = new Array();
 var result3 = new Array();
 
+const min = document.getElementById("min");
+const sec = document.getElementById("sec");
+let min_temp=0;
+let sec_temp=0;
+var count   = 284; 
+
 /*---------------------
  Functions
 -----------------------*/
+// Countdown
+function count_down(){
+              count--;
+              min_temp = Math.floor(count / 60);
+              sec_temp = count % 60;
+              // var count_down = document.getElementById("default");
+              // count_down.innerHTML = ("0"+min) +"：" + ("0"+sec).slice(-2);
+              $("#min").html(min_temp);
+              $("#sec").html(sec_temp);
+              // console.log(count);
+      }
+
+function count_start(){
+                if (num_start === 1) {
+                  interval = setInterval(count_down,1000);
+                }
+            }
 /* 初期処理 */
 $(document).ready(function() {
   // 当たり判定
@@ -272,7 +297,14 @@ function slotCreate(obj, slotno){
 
 /* スロットスタート */
 function slotStart(){
-  
+  console.log(min_temp);
+  console.log(sec_temp);
+ num_start += 1;
+  //音楽再生
+  if (num_start===1){
+  $("#back_music").attr('src','media/dai_zero_kan.mp3');
+  count_start();
+  };
   // スタートボタンの無効化
   $("#startBtn").prop('disabled', true);
   
