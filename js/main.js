@@ -45,15 +45,16 @@ var result3 = new Array();
 
 const min = document.getElementById("min");
 const sec = document.getElementById("sec");
-let min_temp=0;
-let sec_temp=0;
-var count   = 284; 
+let min_temp=1;
+let sec_temp=1;
+var count   = 284;//dai_zero_kanの曲は284秒 
 
 /*---------------------
  Functions
 -----------------------*/
 // Countdown
 function count_down(){
+  if(count>0){
               count--;
               min_temp = Math.floor(count / 60);
               sec_temp = count % 60;
@@ -62,6 +63,10 @@ function count_down(){
               $("#min").html(min_temp);
               $("#sec").html(sec_temp);
               // console.log(count);
+  }else{
+    $("#min").html("0");
+              $("#sec").html("0");
+  }
       }
 
 function count_start(){
@@ -92,6 +97,7 @@ $(document).ready(function() {
 // オフェンスかディフェンスか
 function offense_defense(){
     var num_off_def = Math.floor(Math.random() * 2);
+    if(min_temp != 0 || sec_temp != 0){
     if (num_off_def === 0){
         $("#shouhoku_off").html("オフェンス");
         // $("#shouhoku_img").attr('src','img/kawata.jpeg');
@@ -110,6 +116,21 @@ function offense_defense(){
         // $("#character_image").attr('src','img/kawata.jpeg');
 
     }
+  }else{
+    
+    if(tensuu_1>=tensuu_2){
+    $("#shouhoku_off").html("勝利");
+    $("#sannou_off").html("敗北");
+    changeImgId('shouhoku_img', 'img/shouhoku_win.jpeg');
+    changeImgId('sannou_img', 'img/sannou_lost.jpeg');
+    }else{
+    $("#shouhoku_off").html("敗北");
+    $("#sannou_off").html("勝利");
+    changeImgId('shouhoku_img', 'img/shouhoku_lost.jpeg');
+    changeImgId('sannou_img', 'img/sannou_win.jpeg');
+
+    }
+  }
     return num_off_def
 }
 
@@ -305,6 +326,10 @@ function slotStart(){
   $("#back_music").attr('src','media/dai_zero_kan.mp3');
   count_start();
   };
+
+  if(min_temp === 0 && sec_temp === 0){
+  $("#back_music").attr('src','');
+  }
   // スタートボタンの無効化
   $("#startBtn").prop('disabled', true);
   
