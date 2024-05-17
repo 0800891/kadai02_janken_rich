@@ -47,7 +47,7 @@ const min = document.getElementById("min");
 const sec = document.getElementById("sec");
 let min_temp=1;
 let sec_temp=1;
-var count   = 4;//dai_zero_kanの曲は284秒 
+var count   = 284;//dai_zero_kanの曲は284秒 
 
 /*---------------------
  Functions
